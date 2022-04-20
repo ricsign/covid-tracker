@@ -3,25 +3,25 @@ import {useState, useEffect} from 'react';
 
 import styles from './App.module.css';
 import {Cards, Chart, CountryPicker} from './components';
-import {fetchAllData} from './api';
+import {fetchGlobalData} from './api';
 
 function App() {
-  let [allData, setAllData] = useState({});
+  let [globalData, setGlobalData] = useState({});
 
-  // When mounting app, fetch data from api
+  // When mounting app, fetch global data from api
   useEffect(()=>{
-    const getAllData = async () => {
-      const {data} = await fetchAllData();
+    const getGlobalData = async () => {
+      const data = await fetchGlobalData();
       // After getting the data, store in state to pass to props
-      setAllData(allData => data);
+      setGlobalData(globalData => data);
     };
-    getAllData();
+    getGlobalData();
 
   },[]);
 
   return (
     <div className={styles.container}>
-      <Cards data={allData} />
+      <Cards data={globalData} />
       <CountryPicker/>
       <Chart/>
     </div>

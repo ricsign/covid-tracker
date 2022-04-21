@@ -14,24 +14,24 @@ const Cards = ({data: {cases, recovered, deaths, lastUpdate, todayCases, todayRe
             <Grid container spacing={3} justifyContent="center">
                 <Grid item component={Card} xs={12} md={3} className={cx(styles.card, styles.infected)}>
                     <CardContent>
-                        <Typography color="textSecondary" gutterBottom>Confirmed Cases</Typography>
-                        <Typography variant="h5">
+                        <Typography variant="subtitle1" gutterBottom>Confirmed Cases</Typography>
+                        <Typography variant="h5" color="blue">
                             <CountUp start={0} end={cases} duration={3} separator="," />
                         </Typography>
-                        <Typography>
+                        <Typography color="blue" gutterBottom>
                             +<CountUp start={0} end={todayCases} duration={3} separator="," />
                         </Typography>
-                        <Typography color="textSecondary">{lastUpdate}</Typography>
+                        <Typography color="textSecondary" >{lastUpdate}</Typography>
                         <Typography variant="body2">Number of active cases of COVID-19</Typography>
                     </CardContent>
                 </Grid>
                 <Grid item component={Card} xs={12} md={3} className={cx(styles.card, styles.recovered)}>
                     <CardContent>
-                        <Typography color="textSecondary" gutterBottom>Recovered</Typography>
-                        <Typography variant="h5">
+                        <Typography variant="subtitle1" gutterBottom>Recovered</Typography>
+                        <Typography variant="h5" color="green">
                             <CountUp start={0} end={recovered} duration={3} separator="," />
                         </Typography>
-                        <Typography>
+                        <Typography color="green" gutterBottom>
                             +<CountUp start={0} end={todayRecovered} duration={3} separator="," />
                         </Typography>
                         <Typography color="textSecondary">{lastUpdate}</Typography>
@@ -40,11 +40,11 @@ const Cards = ({data: {cases, recovered, deaths, lastUpdate, todayCases, todayRe
                 </Grid>
                 <Grid item component={Card} xs={12} md={3} className={cx(styles.card, styles.deceased)}>
                     <CardContent>
-                        <Typography color="textSecondary" gutterBottom>Deceased</Typography>
-                        <Typography variant="h5">
+                        <Typography variant="subtitle1" gutterBottom>Deceased</Typography>
+                        <Typography variant="h5" color="red">
                             <CountUp start={0} end={deaths} duration={3} separator="," />
                         </Typography>
-                        <Typography>
+                        <Typography color="red" gutterBottom>
                             +<CountUp start={0} end={todayDeaths} duration={3} separator="," />
                         </Typography>
                         <Typography color="textSecondary">{lastUpdate}</Typography>

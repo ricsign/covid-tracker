@@ -12,7 +12,9 @@ import {
     Title,
     Tooltip,
     Legend,
-    Filler
+    Filler,
+    BarController,
+    BarElement
 } from 'chart.js';
     
 // Must register ChartJS components
@@ -24,13 +26,15 @@ ChartJS.register(
     Title,
     Tooltip,
     Legend,
-    Filler
+    Filler,
+    BarController,
+    BarElement
 );
 
-const Chart = () => {
+const Chart = ({data, chosenCountry}) => {
     const [dailyData, setDailyData] = useState({});
 
-    // When chart mounted, fetch daily data from api
+    // When chart mounted, fetch daily data from api (default global)
     useEffect(() => {
         const getDailyData = async () => {
             setDailyData(await fetchDailyData());
@@ -52,7 +56,7 @@ const Chart = () => {
                     tension: 0.3,
                     fill: true
                 },{
-                    data: Object.entries(dailyData.recovered).flatMap(a => a[1]), // a[1]: number of people
+                    data: Object.entries(dailyData.recovered).flatMap(a => (a[1] ? a[1] : 130899061)), // a[1]: number of people
                     label: "Recovered",
                     borderColor: "green",
                     backgroundColor: 'rgba(0, 255, 0, 0.3)',
@@ -70,10 +74,30 @@ const Chart = () => {
         /> : null
     );
 
+    const barChart = (
+        data.cases ? 
+        (
+            <Bar 
+                data = {{
+                    labels: ['Confirmed', 'Recovered', 'Deceased'],
+                    datasets: [{
+                        label: 'Number of People',
+                        backgroundColor: ['rgba(0, 0, 255, 0.5)', 'rgba(0, 255, 0, 0.5)', 'rgba(255, 0, 0, 0.5)'],
+                        data: [data.cases, data.recovered, data.deaths]
+                    }]
+                }}
+                options = {{
+                    legend: {display: false},
+                    titles: {display: true, text: `Current Report in ${chosenCountry}`},
+                }}
+            />
+        ) : null
+    );
+
     // if(dailyData.cases) console.log(Object.entries(dailyData.cases).flatMap(a => a[1]));
     return (
         <div className={styles.container}>
-            {lineChart}
+            {chosenCountry ? barChart : lineChart}
         </div>
     )
 }

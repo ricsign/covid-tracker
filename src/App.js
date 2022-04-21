@@ -3,27 +3,38 @@ import {useState, useEffect} from 'react';
 
 import styles from './App.module.css';
 import {Cards, Chart, CountryPicker} from './components';
-import {fetchGlobalData} from './api';
+import {fetchGlobalData, fetchCountryData} from './api';
+import titleImage from './images/title.jpeg';
 
 function App() {
-  let [globalData, setGlobalData] = useState({});
+  let [data, setData] = useState({});
+  let [chosenCountry, setChosenCountry] = useState('');
 
   // When mounting app, fetch global data from api
   useEffect(()=>{
     const getGlobalData = async () => {
-      const data = await fetchGlobalData();
       // After getting the data, store in state to pass to props
-      setGlobalData(globalData => data);
+      setData(await fetchGlobalData());
     };
+
     getGlobalData();
 
   },[]);
 
+  // Callback function as prop to handle changing chosen country
+  const handleCountryChange = async (country) => {
+    // Fetch data from api and change the state
+    if(!country) setData(await fetchGlobalData()); // If global is selected, we fetch global data instead
+    else setData(await fetchCountryData(country));
+    setChosenCountry(country);
+  }
+
   return (
     <div className={styles.container}>
-      <Cards data={globalData} />
-      <CountryPicker/>
-      <Chart/>
+      <img src={titleImage} alt="Covid Tracker Logo" className={styles.titleImage}/>
+      <Cards data={data} />
+      <CountryPicker handleCountryChange={handleCountryChange} />
+      <Chart data={data} chosenCountry={chosenCountry} />
     </div>
   );
 }

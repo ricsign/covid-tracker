@@ -3,14 +3,15 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 50px 0;
+    margin: 70px;
 }
 
 .card{
-    margin: 0 3% !important;
+    margin: 1% 3% !important;
 }
 
 .infected {
+    margin-left: 100px;
     border-bottom: 10px solid rgba(0, 0, 255, 0.5);
 }
 
@@ -20,6 +21,10 @@
 
 .deceased{
     border-bottom: 10px solid rgba(255, 0, 0, 0.5);
+}
+
+.flag{
+    margin-top: 40px !important;
 }
 
 @media only screen and (max-width: 900px) {

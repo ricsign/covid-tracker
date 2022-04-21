@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
 
 body{
-    background-color: rgb(251,253,255);
+    background-color: rgb(255,255,255);
     font-family: 'Merriweather', 'Helvetica', 'Arial', 'sans-serif';
 }
 
@@ -12,9 +12,16 @@ body{
     flex-direction: column;
 }
 
+.titleImage{
+    width: 40%;
+}
+
 @media only screen and (max-width: 900px) {
     .container {
       margin: 0 10%;
     }
   
+    .titleImage{
+        width: 100%;
+    }
 }
